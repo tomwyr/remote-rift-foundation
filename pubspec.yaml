@@ -1,0 +1,14 @@
+name: remote_rift_foundation
+description: "A shared library containing common UI, utilities, and core logic used across Remote Rift projects."
+version: 0.5.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.10.0
+
+dev_dependencies:
+  lints: ^6.0.0
+
+workspace:
+  - packages/ui
+  - packages/utils

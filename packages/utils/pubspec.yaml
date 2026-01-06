@@ -1,0 +1,13 @@
+name: remote_rift_foundation_utils
+description: A starting point for Dart libraries or applications.
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.10.0
+
+# dependencies:
+
+dev_dependencies:
+  test: ^1.25.6
+  fake_async: ^1.3.3
