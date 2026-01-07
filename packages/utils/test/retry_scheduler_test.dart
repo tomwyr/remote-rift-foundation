@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:fake_async/fake_async.dart';
-import 'package:remote_rift_foundation_utils/src/retry_scheduler.dart';
-import 'package:remote_rift_foundation_utils/src/types.dart';
+import 'package:remote_rift_utils/src/retry_scheduler.dart';
+import 'package:remote_rift_utils/src/types.dart';
 import 'package:test/test.dart';
 
 void main() {

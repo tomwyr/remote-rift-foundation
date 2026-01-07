@@ -1,4 +1,4 @@
-name: remote_rift_foundation_ui
+name: remote_rift_ui
 description: A starting point for Dart libraries or applications.
 publish_to: none
 resolution: workspace
