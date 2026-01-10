@@ -1,5 +1,4 @@
 name: remote_rift_utils
-description: A starting point for Dart libraries or applications.
 publish_to: none
 
 environment:

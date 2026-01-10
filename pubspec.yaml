@@ -1,6 +1,6 @@
 name: remote_rift_foundation
 description: "A set of shared packages containing common UI, utilities, and core logic used across Remote Rift projects."
-version: 0.5.0
+version: 0.5.1
 publish_to: "none"
 
 environment:
