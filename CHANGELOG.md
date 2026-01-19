@@ -1,3 +1,8 @@
+## [0.6.0] - 2026-01-19
+
+- Added tools package
+- Added update_version script to tools
+
 ## [0.5.1] - 2026-01-10
 
 - Moved service registry code to foundation
