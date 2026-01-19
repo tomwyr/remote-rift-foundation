@@ -1,0 +1,9 @@
+name: remote_rift_tools
+publish_to: none
+version: 0.6.0
+
+environment:
+  sdk: ^3.10.0
+
+executables:
+  update_version:
