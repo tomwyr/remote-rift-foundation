@@ -1,3 +1,7 @@
+## [0.7.0] - 2026-01-26
+
+- Added iterable extensions
+
 ## [0.6.0] - 2026-01-19
 
 - Added tools package
