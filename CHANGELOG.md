@@ -1,3 +1,7 @@
+## [0.8.0] - 2026-01-26
+
+- Added `mapValues` to map extensions
+
 ## [0.7.0] - 2026-01-26
 
 - Added iterable extensions
