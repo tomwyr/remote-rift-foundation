@@ -1,3 +1,7 @@
+## [0.8.1] - 2026-01-28
+
+- Improve timing out service discovery
+
 ## [0.8.0] - 2026-01-26
 
 - Added `mapValues` to map extensions
