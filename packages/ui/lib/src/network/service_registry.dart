@@ -34,19 +34,21 @@ class ServiceRegistry {
 
       /// Start listening for the service before running the discovery to avoid
       /// missing the result event while the listener is being set.
-      final result = _resolveService(discovery, timeLimit);
+      var result = _resolveService(discovery);
+      if (timeLimit != null) {
+        result = result.timeout(timeLimit);
+      }
       await discovery.start();
       return await result;
+    } on TimeoutException {
+      return null;
     } finally {
       await discovery.ensureStopped();
     }
   }
 
-  Future<ServiceAddress?> _resolveService(BonsoirDiscovery discovery, Duration? timeLimit) async {
-    var eventStream = discovery.eventStream ?? .empty();
-    if (timeLimit != null) {
-      eventStream = eventStream.timeout(timeLimit, onTimeout: (sink) => sink.close());
-    }
+  Future<ServiceAddress?> _resolveService(BonsoirDiscovery discovery) async {
+    final eventStream = discovery.eventStream ?? .empty();
 
     await for (var event in eventStream) {
       switch (event) {
