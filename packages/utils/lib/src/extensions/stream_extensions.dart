@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'types.dart';
+import '../types.dart';
 
 extension StreamExtensions<T> on Stream<T> {
   Stream<T> startWith(T initialValue) async* {
