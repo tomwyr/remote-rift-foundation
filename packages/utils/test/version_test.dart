@@ -31,19 +31,28 @@ void main() {
   });
 
   group('isAtLeast', () {
-    test('returns true for same version', () {
+    test('patch matching', () {
       final v = Version(major: 1, minor: 2, patch: 3);
-      expect(v.isAtLeast(v), isTrue);
-    });
 
-    test('returns true for higher version', () {
-      final v = Version(major: 2, minor: 3, patch: 4);
       expect(v.isAtLeast(Version(major: 1, minor: 2, patch: 3)), isTrue);
+      expect(v.isAtLeast(Version(major: 1, minor: 2, patch: 2)), isTrue);
+      expect(v.isAtLeast(Version(major: 1, minor: 2, patch: 4)), isFalse);
     });
 
-    test('returns false for lower version', () {
-      final v = Version(major: 1, minor: 2, patch: 3);
-      expect(v.isAtLeast(Version(major: 2, minor: 0, patch: 0)), isFalse);
+    test('minor matching', () {
+      final v = Version(major: 1, minor: 2, patch: 0);
+
+      expect(v.isAtLeast(Version(major: 1, minor: 2, patch: 99), matching: .minor), isTrue);
+      expect(v.isAtLeast(Version(major: 1, minor: 2, patch: 0), matching: .minor), isTrue);
+      expect(v.isAtLeast(Version(major: 1, minor: 3, patch: 0), matching: .minor), isFalse);
+    });
+
+    test('major matching', () {
+      final v = Version(major: 2, minor: 0, patch: 0);
+
+      expect(v.isAtLeast(Version(major: 1, minor: 99, patch: 99), matching: .major), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 0, patch: 0), matching: .major), isTrue);
+      expect(v.isAtLeast(Version(major: 3, minor: 0, patch: 0), matching: .major), isFalse);
     });
   });
 }

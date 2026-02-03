@@ -20,12 +20,18 @@ class Version extends Equatable {
   final int minor;
   final int patch;
 
-  bool isAtLeast(Version other) {
-    return major >= other.major && minor >= other.minor && patch >= other.patch;
+  bool isAtLeast(Version other, {VersionComponent matching = .patch}) {
+    return switch (matching) {
+      .major => major >= other.major,
+      .minor => major >= other.major && minor >= other.minor,
+      .patch => major >= other.major && minor >= other.minor && patch >= other.patch,
+    };
   }
 
   @override
   List<Object?> get props => [major, minor, patch];
 }
+
+enum VersionComponent { major, minor, patch }
 
 enum VersionError implements Exception { invalidInput }
