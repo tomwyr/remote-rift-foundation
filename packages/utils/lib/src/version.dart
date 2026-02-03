@@ -20,11 +20,25 @@ class Version extends Equatable {
   final int minor;
   final int patch;
 
-  bool isAtLeast(Version other, {VersionComponent matching = .patch}) {
-    return switch (matching) {
+  bool isAtLeast(Version other, {VersionComponent upTo = .patch}) {
+    return switch (upTo) {
       .major => major >= other.major,
-      .minor => major >= other.major && minor >= other.minor,
-      .patch => major >= other.major && minor >= other.minor && patch >= other.patch,
+      .minor => major > other.major || major == other.major && minor >= other.minor,
+      .patch =>
+        major > other.major ||
+            major == other.major && minor > other.minor ||
+            major == other.major && minor == other.minor && patch >= other.patch,
+    };
+  }
+
+  bool isGreaterThan(Version other, {VersionComponent upTo = .patch}) {
+    return switch (upTo) {
+      .major => major > other.major,
+      .minor => major > other.major || major == other.major && minor > other.minor,
+      .patch =>
+        major > other.major ||
+            major == other.major && minor > other.minor ||
+            major == other.major && minor == other.minor && patch > other.patch,
     };
   }
 

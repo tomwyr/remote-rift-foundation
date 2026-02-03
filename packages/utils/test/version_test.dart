@@ -31,28 +31,84 @@ void main() {
   });
 
   group('isAtLeast', () {
-    test('patch matching', () {
-      final v = Version(major: 1, minor: 2, patch: 3);
+    test('up to major', () {
+      final v = Version(major: 2, minor: 3, patch: 4);
 
-      expect(v.isAtLeast(Version(major: 1, minor: 2, patch: 3)), isTrue);
-      expect(v.isAtLeast(Version(major: 1, minor: 2, patch: 2)), isTrue);
-      expect(v.isAtLeast(Version(major: 1, minor: 2, patch: 4)), isFalse);
+      expect(v.isAtLeast(Version(major: 1, minor: 0, patch: 0), upTo: .major), isTrue);
+      expect(v.isAtLeast(Version(major: 1, minor: 5, patch: 6), upTo: .major), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 2, patch: 2), upTo: .major), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 3, patch: 3), upTo: .major), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 3, patch: 4), upTo: .major), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 3, patch: 5), upTo: .major), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 4, patch: 5), upTo: .major), isTrue);
+      expect(v.isAtLeast(Version(major: 3, minor: 0, patch: 0), upTo: .major), isFalse);
     });
 
-    test('minor matching', () {
-      final v = Version(major: 1, minor: 2, patch: 0);
+    test('up to minor', () {
+      final v = Version(major: 2, minor: 3, patch: 4);
 
-      expect(v.isAtLeast(Version(major: 1, minor: 2, patch: 99), matching: .minor), isTrue);
-      expect(v.isAtLeast(Version(major: 1, minor: 2, patch: 0), matching: .minor), isTrue);
-      expect(v.isAtLeast(Version(major: 1, minor: 3, patch: 0), matching: .minor), isFalse);
+      expect(v.isAtLeast(Version(major: 1, minor: 0, patch: 0), upTo: .minor), isTrue);
+      expect(v.isAtLeast(Version(major: 1, minor: 5, patch: 6), upTo: .minor), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 2, patch: 2), upTo: .minor), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 3, patch: 3), upTo: .minor), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 3, patch: 4), upTo: .minor), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 3, patch: 5), upTo: .minor), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 4, patch: 5), upTo: .minor), isFalse);
+      expect(v.isAtLeast(Version(major: 3, minor: 0, patch: 0), upTo: .minor), isFalse);
     });
 
-    test('major matching', () {
-      final v = Version(major: 2, minor: 0, patch: 0);
+    test('up to patch', () {
+      final v = Version(major: 2, minor: 3, patch: 4);
 
-      expect(v.isAtLeast(Version(major: 1, minor: 99, patch: 99), matching: .major), isTrue);
-      expect(v.isAtLeast(Version(major: 2, minor: 0, patch: 0), matching: .major), isTrue);
-      expect(v.isAtLeast(Version(major: 3, minor: 0, patch: 0), matching: .major), isFalse);
+      expect(v.isAtLeast(Version(major: 1, minor: 0, patch: 0), upTo: .patch), isTrue);
+      expect(v.isAtLeast(Version(major: 1, minor: 5, patch: 6), upTo: .patch), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 2, patch: 2), upTo: .patch), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 3, patch: 3), upTo: .patch), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 3, patch: 4), upTo: .patch), isTrue);
+      expect(v.isAtLeast(Version(major: 2, minor: 3, patch: 5), upTo: .patch), isFalse);
+      expect(v.isAtLeast(Version(major: 2, minor: 4, patch: 5), upTo: .patch), isFalse);
+      expect(v.isAtLeast(Version(major: 3, minor: 0, patch: 0), upTo: .patch), isFalse);
+    });
+  });
+
+  group('isGreaterThan', () {
+    test('up to major', () {
+      final v = Version(major: 2, minor: 3, patch: 4);
+
+      expect(v.isGreaterThan(Version(major: 1, minor: 0, patch: 0), upTo: .major), isTrue);
+      expect(v.isGreaterThan(Version(major: 1, minor: 5, patch: 6), upTo: .major), isTrue);
+      expect(v.isGreaterThan(Version(major: 2, minor: 2, patch: 2), upTo: .major), isFalse);
+      expect(v.isGreaterThan(Version(major: 2, minor: 3, patch: 3), upTo: .major), isFalse);
+      expect(v.isGreaterThan(Version(major: 2, minor: 3, patch: 4), upTo: .major), isFalse);
+      expect(v.isGreaterThan(Version(major: 2, minor: 3, patch: 5), upTo: .major), isFalse);
+      expect(v.isGreaterThan(Version(major: 2, minor: 4, patch: 5), upTo: .major), isFalse);
+      expect(v.isGreaterThan(Version(major: 3, minor: 0, patch: 0), upTo: .major), isFalse);
+    });
+
+    test('up to minor', () {
+      final v = Version(major: 2, minor: 3, patch: 4);
+
+      expect(v.isGreaterThan(Version(major: 1, minor: 0, patch: 0), upTo: .minor), isTrue);
+      expect(v.isGreaterThan(Version(major: 1, minor: 5, patch: 6), upTo: .minor), isTrue);
+      expect(v.isGreaterThan(Version(major: 2, minor: 2, patch: 2), upTo: .minor), isTrue);
+      expect(v.isGreaterThan(Version(major: 2, minor: 3, patch: 3), upTo: .minor), isFalse);
+      expect(v.isGreaterThan(Version(major: 2, minor: 3, patch: 4), upTo: .minor), isFalse);
+      expect(v.isGreaterThan(Version(major: 2, minor: 3, patch: 5), upTo: .minor), isFalse);
+      expect(v.isGreaterThan(Version(major: 2, minor: 4, patch: 5), upTo: .minor), isFalse);
+      expect(v.isGreaterThan(Version(major: 3, minor: 0, patch: 0), upTo: .minor), isFalse);
+    });
+
+    test('up to patch', () {
+      final v = Version(major: 2, minor: 3, patch: 4);
+
+      expect(v.isGreaterThan(Version(major: 1, minor: 0, patch: 0), upTo: .patch), isTrue);
+      expect(v.isGreaterThan(Version(major: 1, minor: 5, patch: 6), upTo: .patch), isTrue);
+      expect(v.isGreaterThan(Version(major: 2, minor: 2, patch: 2), upTo: .patch), isTrue);
+      expect(v.isGreaterThan(Version(major: 2, minor: 3, patch: 3), upTo: .patch), isTrue);
+      expect(v.isGreaterThan(Version(major: 2, minor: 3, patch: 4), upTo: .patch), isFalse);
+      expect(v.isGreaterThan(Version(major: 2, minor: 3, patch: 5), upTo: .patch), isFalse);
+      expect(v.isGreaterThan(Version(major: 2, minor: 4, patch: 5), upTo: .patch), isFalse);
+      expect(v.isGreaterThan(Version(major: 3, minor: 0, patch: 0), upTo: .patch), isFalse);
     });
   });
 }
