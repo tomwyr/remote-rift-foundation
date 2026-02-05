@@ -20,6 +20,14 @@ void main() {
     });
   });
 
+  group('stringValue', () {
+    test('returns correct string representation', () {
+      expect(Version(major: 1, minor: 2, patch: 3).stringValue, '1.2.3');
+      expect(Version(major: 0, minor: 0, patch: 0).stringValue, '0.0.0');
+      expect(Version(major: 10, minor: 20, patch: 30).stringValue, '10.20.30');
+    });
+  });
+
   group('equals', () {
     test('versions with same values are equal', () {
       expect(Version(major: 1, minor: 2, patch: 3), Version(major: 1, minor: 2, patch: 3));

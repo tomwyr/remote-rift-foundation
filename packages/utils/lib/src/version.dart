@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 class Version extends Equatable {
   Version({required this.major, required this.minor, required this.patch});
 
+  String get stringValue => '$major.$minor.$patch';
+
   factory Version.parse(String input) {
     final regex = RegExp(r'^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:\+\d+)?$');
     final match = regex.firstMatch(input);
