@@ -49,18 +49,36 @@ dev_dependencies:
 
 ### Available tools
 
-- **update_version**
+The following list provides an overview of the available utility scripts.
 
-  Updates the root `pubspec.yaml` and all `pubspec.yaml` files in the `packages` directory to a specified version.
+**update_version**
 
-  To update versions, run the script from the project root directory:
+Updates the root `pubspec.yaml` and all `pubspec.yaml` files in the `packages` directory to a specified version.
 
-  ```bash
-  dart run remote_rift_tools:update_version <version>
-  ```
+To update versions, run the script from the project root directory:
+
+```bash
+dart run remote_rift_tools:update_version <version>
+```
 
 > [!important]
 > The version argument must be a valid [semantic version](https://semver.org/).
+
+**generate_asset**
+
+Generates a Dart file that exposes the contents of a selected asset as a runtime-accessible string.
+
+To generate an asset, run the script from the project root directory:
+
+```bash
+dart run remote_rit_tools:generate_asset <asset_type> <target_path>
+```
+
+Available asset types:
+
+- pubspec - The project's `pubspec.yaml` file.
+
+The `target_path` parameter specifies a relative path from the project root where the generated Dart file will be saved.
 
 ## Related Projects
 

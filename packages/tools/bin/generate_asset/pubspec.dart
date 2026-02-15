@@ -3,16 +3,17 @@ import 'dart:io';
 import 'package:path/path.dart' as path;
 
 void generatePubspecAsset(String targetPath) {
-  print('Generating pubspec asset');
+  print('Generating pubspec asset...');
   final rootPath = Directory.current.path;
   final pubspec = loadPackagePubspec(rootPath);
   final asset = renderPubspecAsset(pubspec);
   savePubspecAsset(rootPath, targetPath, asset);
+  print('Successfully generated the asset');
 }
 
 String loadPackagePubspec(String rootPath) {
   final pubspecPath = path.join(rootPath, 'pubspec.yaml');
-  print('Reading asset from ${path.relative(pubspecPath)}');
+  print('Reading file contents from ${path.relative(pubspecPath)}');
   final file = File(pubspecPath);
   if (!file.existsSync()) {
     throw Exception(
@@ -24,7 +25,7 @@ String loadPackagePubspec(String rootPath) {
 
 void savePubspecAsset(String rootPath, String targetPath, String contents) {
   final assetPath = path.joinAll([rootPath, targetPath]);
-  print('Saving asset under ${path.relative(assetPath)}');
+  print('Saving generated code under ${path.relative(assetPath)}');
   final file = File(assetPath);
   if (!file.existsSync()) {
     file.createSync(recursive: true);
