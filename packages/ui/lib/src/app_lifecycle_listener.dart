@@ -1,5 +1,9 @@
 import 'package:flutter/widgets.dart';
 
+class AppLifecycle {
+  static AppLifecycleState? get currentState => WidgetsBinding.instance.lifecycleState;
+}
+
 class AppLifecycleListener with WidgetsBindingObserver {
   AppLifecycleListener({required AppLifecycleStateChangeListener listener}) : _listener = listener;
 
